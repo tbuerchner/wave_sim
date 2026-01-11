@@ -27,14 +27,13 @@ def gaussian_pulse_nd(x0, sigma):
     Parameters:
     x0 : np.array
         Center (nD array).
-    sigma : np.array or float
-        Standard deviations (array for anisotropic, float for isotropic).
+    sigma : np.array
+        Standard deviations
     
     Returns:
     f : lambda function
         f(coords) for the pulse value.
     """
-    sigma = np.array(sigma)
     def f(coords):
         diff = coords - x0
         exponent = np.sum(diff**2 / (2 * sigma**2), axis=-1)
