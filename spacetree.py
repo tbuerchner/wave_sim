@@ -17,12 +17,10 @@ def generate_spacetree(element_indices, max_depth, n_seed, mesh_now, domain):
                 coords_dummy_end[i_d] = current_partition[i_d][1]
                 seed = np.linspace(mesh_now.map_to_physical(element_indices, coords_dummy_start)[i_d],
                                    mesh_now.map_to_physical(element_indices, coords_dummy_end)[i_d], n_seed)
-                print(seed)
                 seeds.append(seed)
             coords_grid = np.meshgrid(*seeds, indexing='ij')
             coords_list = [coord.ravel() for coord in coords_grid]
             result = domain(coords_list)
-            print(result)
 
             # Subdivide if some are inside and some outside
             if not np.all(result) and not np.all(np.logical_not(result)):
