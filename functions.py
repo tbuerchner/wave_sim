@@ -16,7 +16,7 @@ def gaussian_pulse_1d(x0, sigma, wave_speed=1.0):
     """
 
     def f(x, t):
-        return np.exp(-(x + wave_speed*t)**2 / (2 * sigma ** 2)) + np.exp(-(x - wave_speed*t)**2 / (2 * sigma ** 2))
+        return np.exp(-(x - x0 + wave_speed*t)**2 / (2 * sigma ** 2)) + np.exp(-(x - x0 - wave_speed*t)**2 / (2 * sigma ** 2))
     
     return f
 

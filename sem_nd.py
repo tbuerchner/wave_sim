@@ -6,7 +6,7 @@ import itertools
 from tqdm import tqdm
 
 import material
-import mesh
+import mesh_cg as mesh
 import integration
 import ansatz
 import functions

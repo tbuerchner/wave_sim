@@ -108,4 +108,20 @@ class ndRectangle:
             x_end = x_start + self.dx[i_d]
             local_coords[i_d] = (2 * physical_coords[i_d] - (x_start + x_end)) / (x_end - x_start)
         
-        return local_coords     
+        return local_coords
+
+    def map_to_physical_dim(self, d, e, local_coords):
+        """Map local coordinates of one dimension to physical coordinates for a given element."""
+
+        x_start = self.origin[d] + e * self.dx[d]
+        x_end = x_start + self.dx[d]
+        
+        return 0.5 * (x_start + x_end) + 0.5 * (x_end - x_start) * local_coords
+    
+    def map_to_reference_dim(self, d, e, physical_coords):
+        """Map physical coordinates of one dimension to local coordinates for a given element."""
+
+        x_start = self.origin[d] + e * self.dx[d]
+        x_end = x_start + self.dx[d]
+        
+        return (2 * physical_coords - (x_start + x_end)) / (x_end - x_start)

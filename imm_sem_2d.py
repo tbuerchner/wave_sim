@@ -6,7 +6,7 @@ import itertools
 from tqdm import tqdm
 
 import material
-import mesh
+import mesh_cg as mesh
 import integration
 import ansatz
 import functions
@@ -19,11 +19,11 @@ print("Setting up 2D SEM problem...")
 
 # domain
 origin = np.array([0.0, 0.0])
-length = np.array([1.0, 0.5])
+length = np.array([2.0, 2.0])
 print(f"Domain origin: {origin}, length: {length}")
 
 # mesh
-n_elements = np.array([20, 10])
+n_elements = np.array([20, 20])
 polynomial_degree = np.array([4, 4])
 print(f"Number of elements: {n_elements}, Polynomial degree: {polynomial_degree}")
 mesh_2d = mesh.ndRectangle(dim=dim, origin=origin, lengths=length, n_elements=n_elements, polynomial_degree=polynomial_degree)
@@ -31,7 +31,8 @@ mesh_2d = mesh.ndRectangle(dim=dim, origin=origin, lengths=length, n_elements=n_
 # physical domain (plate with a hole)
 center = np.array([length[0], length[1]/2])
 radius = 0.1
-domain = geometries.hyperrectangle_with_hypersphere(center=center, radius=radius)
+# domain = geometries.hyperrectangle_with_hypersphere(center=center, radius=radius)
+domain = geometries.all_physical(center=center, radius=radius)
 
 # stabilization parameters for cut cells and parameter for spacetree
 alpha = 1e-2
@@ -45,7 +46,7 @@ print(f"Material properties - Density: {density}, Wave Speed: {wave_speed}")
 mat = material.acousticMaterial(density=density, wave_speed=wave_speed)
 
 # time
-T = 2 * length[0] / wave_speed
+T = length[0] / 2 / wave_speed # 2 * length[0] / wave_speed
 n_steps = 2000
 print(f"Total simulation time: {T}, Number of time steps: {n_steps}")
 dt = T / n_steps

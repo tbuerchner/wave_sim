@@ -7,6 +7,13 @@ def all_physical():
     
     return io_test
 
+def all_fictitious():
+    """Domain description just reurning 0."""
+    def io_test(coords):
+        return 0.0
+    
+    return io_test
+
 def immersed_1d_bar(x_bounds):
     """Create implicit function for an immersed 1D bar."""
     def io_test(coords):

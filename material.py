@@ -8,6 +8,7 @@ class acousticMaterial:
         """Calculate and return the acoustic impedance of the material."""
         return self.density * self.wave_speed
     
+    @property
     def bulk_modulus(self):
         """Calculate and return the bulk modulus of the material."""
         return self.density * self.wave_speed ** 2
